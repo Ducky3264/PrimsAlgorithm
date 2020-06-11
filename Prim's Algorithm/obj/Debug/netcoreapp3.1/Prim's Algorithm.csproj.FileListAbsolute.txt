@@ -9,3 +9,16 @@ C:\Users\David\source\repos\Prim's Algorithm\Prim's Algorithm\obj\Debug\netcorea
 C:\Users\David\source\repos\Prim's Algorithm\Prim's Algorithm\obj\Debug\netcoreapp3.1\Prim's Algorithm.AssemblyInfo.cs
 C:\Users\David\source\repos\Prim's Algorithm\Prim's Algorithm\obj\Debug\netcoreapp3.1\Prim's Algorithm.dll
 C:\Users\David\source\repos\Prim's Algorithm\Prim's Algorithm\obj\Debug\netcoreapp3.1\Prim's Algorithm.pdb
+C:\Users\david\Source\Repos\PrimsAlgorithm\Prim's Algorithm\bin\Debug\netcoreapp3.1\Prim's Algorithm.exe
+C:\Users\david\Source\Repos\PrimsAlgorithm\Prim's Algorithm\bin\Debug\netcoreapp3.1\Prim's Algorithm.deps.json
+C:\Users\david\Source\Repos\PrimsAlgorithm\Prim's Algorithm\bin\Debug\netcoreapp3.1\Prim's Algorithm.runtimeconfig.json
+C:\Users\david\Source\Repos\PrimsAlgorithm\Prim's Algorithm\bin\Debug\netcoreapp3.1\Prim's Algorithm.runtimeconfig.dev.json
+C:\Users\david\Source\Repos\PrimsAlgorithm\Prim's Algorithm\bin\Debug\netcoreapp3.1\Prim's Algorithm.dll
+C:\Users\david\Source\Repos\PrimsAlgorithm\Prim's Algorithm\bin\Debug\netcoreapp3.1\Prim's Algorithm.pdb
+C:\Users\david\Source\Repos\PrimsAlgorithm\Prim's Algorithm\obj\Debug\netcoreapp3.1\Prim's Algorithm.csprojAssemblyReference.cache
+C:\Users\david\Source\Repos\PrimsAlgorithm\Prim's Algorithm\obj\Debug\netcoreapp3.1\Prim's Algorithm.csproj.CoreCompileInputs.cache
+C:\Users\david\Source\Repos\PrimsAlgorithm\Prim's Algorithm\obj\Debug\netcoreapp3.1\Prim's Algorithm.AssemblyInfoInputs.cache
+C:\Users\david\Source\Repos\PrimsAlgorithm\Prim's Algorithm\obj\Debug\netcoreapp3.1\Prim's Algorithm.AssemblyInfo.cs
+C:\Users\david\Source\Repos\PrimsAlgorithm\Prim's Algorithm\obj\Debug\netcoreapp3.1\Prim's Algorithm.dll
+C:\Users\david\Source\Repos\PrimsAlgorithm\Prim's Algorithm\obj\Debug\netcoreapp3.1\Prim's Algorithm.pdb
+C:\Users\david\Source\Repos\PrimsAlgorithm\Prim's Algorithm\obj\Debug\netcoreapp3.1\Prim's Algorithm.genruntimeconfig.cache
