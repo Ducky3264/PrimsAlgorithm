@@ -99,13 +99,34 @@ namespace Prim_s_Algorithm
                 Console.WriteLine("");
             }
             Random rand = new Random();
-            char start = VI.V.alpha[rand.Next(0, 26)];
+            char start = VI.V.alpha[rand.Next(0, VI.V.Nodes.Count)];
             VectorXY StartXY = VI.V.Nodes[start];
+            Dictionary<char, float> Distances = new Dictionary<char, float>();
+            int IcurrLetter = 0;
+            for (int i = 0; i < VI.V.Nodes.Count - 1; i++)
+            {
+
+                VectorXY TestXY = VI.V.Nodes[VI.V.alpha[IcurrLetter]];
+                float Dis = MathF.Sqrt((StartXY.x - TestXY.x) * (StartXY.x - TestXY.x) + (StartXY.y - TestXY.y) * (StartXY.y - TestXY.y));
+                if (!(Dis == 0))
+                {
+                    Distances.Add(VI.V.alpha[IcurrLetter], Dis);
+                } else
+                {
+                    Distances.Add(VI.V.alpha[IcurrLetter], (float)10000);
+                }
+                IcurrLetter++;
+            }
+            Console.WriteLine(Distances);
+            float[] DistancesF = new float[Distances.Count];
+            Distances.Values.CopyTo(DistancesF, 0);
+            System.Array.Sort(DistancesF);
+            
             //Todo: Create a while function that checks to see if there is anything not visited. If not, do the math to make the next visit, add it to a list, display this on a pretty print, and repeat.
             //List<int> LX = VI.V.Nodes.Values.Select((x) => x.x).ToList();
             //List<int> LY = VI.V.Nodes.Values.Select((x) => x.y).ToList();
             //Dictionary<int, int> NODEXY = new Dictionary<int, int>();
-            
+
             Console.WriteLine("Finish");
             
         }
