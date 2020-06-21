@@ -6,8 +6,19 @@ using System.Numerics;
 
 namespace Prim_s_Algorithm
 {
+    public class TwoChar
+    {
+        public char From { get; set; }
+        public char To { get; set; }
+        public TwoChar(char from, char to)
+        {
+            From = from;
+            To = to;
+        }
+    }
     public struct VectorXY
     {
+        
         public VectorXY(int Assx, int Assy)
         {
             x = Assx;
@@ -26,13 +37,14 @@ namespace Prim_s_Algorithm
     public class VectorInfo
     {
         public Values V = new Values();
-        
+        public List<VectorXY> VistedXY = new List<VectorXY>();
         public VectorInfo()
         {
+
             List<int> UsedLengthsX = new List<int>();
             List<int> UsedLengthsY = new List<int>();
             var rand = new Random();
-            
+
             for (int i = 0; i <= 8; i++)
             {
                 var RandNX = rand.Next(1, 10);
@@ -57,26 +69,17 @@ namespace Prim_s_Algorithm
             {
                 var S1 = V.Nodes.ElementAt(i);
                 Console.WriteLine($"{S1}");
-                
+
             }
             return "";
         }
-       //Grab x value
-       //Grab y value
-       //Grab 2nd of each
-       //Log
-       //Compare
-        
+
     }
     public class Program
     {
-        static void Main(string[] args)
+
+        public static void Print(VectorInfo VI, VectorXY Start)
         {
-            VectorInfo VI = new VectorInfo();
-            VI.ToString();
-            Console.Write("Press enter to begin sorting...");
-            Console.ReadLine();
-            //List<VectorXY> LVXY = new List<VectorXY>();
             VectorXY[] VXYarr = new VectorXY[VI.V.Nodes.Values.Count];
             VI.V.Nodes.Values.CopyTo(VXYarr, 0);
             var VXYL = VXYarr.AsEnumerable<VectorXY>().ToList();
@@ -84,51 +87,87 @@ namespace Prim_s_Algorithm
             {
                 for (int i1 = 1; i1 <= VXYL.Count; i1++)
                 {
-                    var compVXY = new VectorXY(i, i1);
+                    var compVXY = new VectorXY(i1, i);
                     if (VXYL.Contains(compVXY))
                     {
-                        Console.Write("Y");
-                    } else
+                        if (compVXY.x == Start.x && compVXY.y == Start.y)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("S");
+                            Console.ResetColor();
+                        }
+                        else if (VI.VistedXY.Contains(compVXY))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("Y");
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.Write("Y");
+                        }
+                    }
+                    else
                     {
                         Console.Write("0");
                     }
                     Console.Write("  ");
-                    
+
                 }
                 Console.WriteLine("");
                 Console.WriteLine("");
             }
+        }
+        static void Main(string[] args)
+        {
+            VectorInfo VI = new VectorInfo();
             Random rand = new Random();
+            //VI.ToString();
+            Console.Write("Press enter to begin sorting...");
+            Console.ReadLine();
+            //List<VectorXY> LVXY = new List<VectorXY>();
+            VectorXY[] VXYarr = new VectorXY[VI.V.Nodes.Values.Count];
+            VI.V.Nodes.Values.CopyTo(VXYarr, 0);
+            var VXYL = VXYarr.AsEnumerable<VectorXY>().ToList();
             char start = VI.V.alpha[rand.Next(0, VI.V.Nodes.Count)];
             VectorXY StartXY = VI.V.Nodes[start];
-            Dictionary<char, float> Distances = new Dictionary<char, float>();
-            int IcurrLetter = 0;
-            for (int i = 0; i < VI.V.Nodes.Count - 1; i++)
+            VI.VistedXY.Add(StartXY);
+            Print(VI, StartXY);
+            int RunNumber = 0;
+            while (VI.VistedXY.Count != VI.V.Nodes.Count)
             {
-
-                VectorXY TestXY = VI.V.Nodes[VI.V.alpha[IcurrLetter]];
-                float Dis = MathF.Sqrt((StartXY.x - TestXY.x) * (StartXY.x - TestXY.x) + (StartXY.y - TestXY.y) * (StartXY.y - TestXY.y));
-                if (!(Dis == 0))
+                Dictionary<TwoChar, float> Distances = new Dictionary<TwoChar, float>();
+                int IcurrLetter = 0;
+                for (int i = 0; i <= VI.V.Nodes.Count - 1; i++)
                 {
-                    Distances.Add(VI.V.alpha[IcurrLetter], Dis);
-                } else
-                {
-                    Distances.Add(VI.V.alpha[IcurrLetter], (float)10000);
+                    VectorXY TestXY = VI.V.Nodes[VI.V.alpha[IcurrLetter]];
+                    if (!VI.VistedXY.Contains(TestXY))
+                    {
+                        foreach (VectorXY VXY in VI.VistedXY)
+                        {
+                            float Dis = MathF.Sqrt((VXY.x - TestXY.x) * (VXY.x - TestXY.x) + (VXY.y - TestXY.y) * (VXY.y - TestXY.y));
+                            if (!(Dis == 0))
+                            {
+                                Distances.Add(new TwoChar(VI.V.Nodes.FirstOrDefault(x => x.Value.x == VXY.x && x.Value.y == VXY.y).Key, VI.V.Nodes.FirstOrDefault(x => x.Value.x == TestXY.x && x.Value.y == TestXY.y).Key), Dis);
+                            }
+                            else
+                            {   
+                            }
+                        }
+                    }
+                    IcurrLetter++;
                 }
-                IcurrLetter++;
+                float[] DistancesF = new float[Distances.Count];
+                Distances.Values.CopyTo(DistancesF, 0);
+                System.Array.Sort(DistancesF);
+                char ToTravel = Distances.FirstOrDefault(x => x.Value == DistancesF[0]).Key.To;
+                VI.VistedXY.Add(VI.V.Nodes[ToTravel]);
+                Console.WriteLine($"{ToTravel} was visited. Press enter to continue...");
+                Console.ReadLine();
+                Print(VI, StartXY);
+                RunNumber++;
             }
-            Console.WriteLine(Distances);
-            float[] DistancesF = new float[Distances.Count];
-            Distances.Values.CopyTo(DistancesF, 0);
-            System.Array.Sort(DistancesF);
-            
-            //Todo: Create a while function that checks to see if there is anything not visited. If not, do the math to make the next visit, add it to a list, display this on a pretty print, and repeat.
-            //List<int> LX = VI.V.Nodes.Values.Select((x) => x.x).ToList();
-            //List<int> LY = VI.V.Nodes.Values.Select((x) => x.y).ToList();
-            //Dictionary<int, int> NODEXY = new Dictionary<int, int>();
-
-            Console.WriteLine("Finish");
-            
         }
     }
+
 }
